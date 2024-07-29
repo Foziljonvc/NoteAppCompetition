@@ -1,21 +1,24 @@
 <?php
 
-require "src/tasks.php";
+require "src/Note.php";
 
 $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['notes'])) {
         $user->addNotes($_POST['notes']);
+    } elseif (isset($_POST['update'])) {
+        $user->updateNote($_POST['update'], $_POST['update_id']);
     }
+    header('Location: view.php');
+    exit();
+}
+
+if (isset($_GET['id'])) {
+    $user->deleteNote($_GET['id']);
 }
 
 $notes = $user->getAllNotes();
-
-if (empty($notes)) {
-    echo "Malumotlar bazasi bo'sh";
-    return;
-}
 
 ?>
 
@@ -48,29 +51,35 @@ if (empty($notes)) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($notes as $note) : ?>
-                        <tr>
-                            <th scope="row"><?php
-                                            echo $note['id']; ?></th>
-                            <td><?php
-                                echo $note['notes']; ?></td>
-                            <td><?php
-                                echo $note['data']; ?></td>
-                            <td>
-                           <button type="submit" class="btn btn-primary" name="truncateButton">
-                           <i class="bi bi-trash3-fill"></i> Delete
-                           </button>
-                            </td>
-                            <td>
-                            <button type="submit" class="btn btn-primary" name="truncateButton">
-                            <i class="bi bi-pencil-fill"></i> Edit
-                            </button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php if (!empty($notes)): ?>
+                        <?php foreach ($notes as $note) : ?>
+                            <tr>
+                                <th scope="row"><?php echo $note['id']; ?></th>
+                                <td>
+                                    <?php echo $note['notes']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $note['data']; ?>
+                                </td>
+                                <td>
+                                    <a href="view.php?id=<?php echo $note['id']; ?>" class="btn btn-danger"><i class="bi bi-trash3-fill"></i>  Delete</a>
+                                </td>
+                                <td>
+                                    <a href="view.php?edit=<?php echo $note['id']; ?>" class="btn btn-danger"><i class="bi bi-pencil-fill"></i>  Edit</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </form>
+        <?php if (isset($_GET['edit'])): ?>
+            <form action="view.php" method="POST">
+                <input type="text" name="update" class="form-control" placeholder="Enter the Update text">
+                <input type="hidden" name="update_id" value="<?php echo $_GET['edit'] ?>">
+                <button type="submit" class="btn btn-success"> Update </button>
+            </form>
+        <?php endif; ?>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

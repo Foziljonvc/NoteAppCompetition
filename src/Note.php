@@ -7,8 +7,10 @@ class User extends DB
 
     public function addNotes (string $text)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO NoteApp (notes) VALUES (:notes)");
+        $stmt = $this->pdo->prepare("INSERT INTO NoteApp (notes, data) VALUES (:notes, :data)");
+        $now = date('Y:m:d H-i-s');
         $stmt->bindParam(':notes', $text);
+        $stmt->bindParam(':data', $now);
         $stmt->execute();
     }
 
@@ -20,10 +22,20 @@ class User extends DB
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
-    public function delete(int $id): bool
+
+    public function deleteNote(int $id)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM notes WHERE id = :id");
+        $stmt = $this->pdo->prepare("DELETE FROM NoteApp WHERE id = :id");
         $stmt->bindParam(':id', $id);
-        return $stmt->execute();
+        $stmt->execute();
     }
+
+    public function updateNote(string $text, int $id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE NoteApp SET notes = :notes WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':notes', $text);
+        $stmt->execute();
+    }
+
 }
