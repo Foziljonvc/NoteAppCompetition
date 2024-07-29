@@ -20,4 +20,10 @@ class User extends DB
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
+    public function delete(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM notes WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
 }
