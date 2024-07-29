@@ -18,4 +18,10 @@ class USER{
         
         return $stmt->execute();
     }
+
+    public function getAll(): false|array
+    {
+        return $this->pdo->query("SELECT * FROM NoteApp")->fetchAll(PDO::FETCH_OBJ);
+    }
+
 }
