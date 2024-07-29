@@ -5,7 +5,15 @@
     
     "autoload": {
         "classmap": [
-            "."
-        ]
+            ".",
+            "src/",
+            "Bot/",
+            "Frontend/",
+            "Routes/"
+        ],
+
+        "psr-4": {
+            "App\\": "src/"
+        }          
     }
 }

@@ -115,6 +115,8 @@ return array(
     'Psr\\Http\\Message\\UploadedFileInterface' => $vendorDir . '/psr/http-message/src/UploadedFileInterface.php',
     'Psr\\Http\\Message\\UriFactoryInterface' => $vendorDir . '/psr/http-factory/src/UriFactoryInterface.php',
     'Psr\\Http\\Message\\UriInterface' => $vendorDir . '/psr/http-message/src/UriInterface.php',
+    'Routes' => $baseDir . '/src/Routes.php',
     'User' => $baseDir . '/src/User.php',
+    'inspection' => $baseDir . '/Routes/inspection.php',
     'sendMessage' => $baseDir . '/Bot/sendMessage.php',
 );

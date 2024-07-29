@@ -24,6 +24,10 @@ class ComposerStaticInit7827c548fdcc7e87cb0ae341dd2c6b1b
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -47,6 +51,10 @@ class ComposerStaticInit7827c548fdcc7e87cb0ae341dd2c6b1b
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
@@ -160,7 +168,9 @@ class ComposerStaticInit7827c548fdcc7e87cb0ae341dd2c6b1b
         'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
         'Psr\\Http\\Message\\UriFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UriFactoryInterface.php',
         'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
+        'Routes' => __DIR__ . '/../..' . '/src/Routes.php',
         'User' => __DIR__ . '/../..' . '/src/User.php',
+        'inspection' => __DIR__ . '/../..' . '/Routes/inspection.php',
         'sendMessage' => __DIR__ . '/../..' . '/Bot/sendMessage.php',
     );
 

@@ -6,12 +6,28 @@ class Note extends DB {
 
     public function addNotes (string $text)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO Notes (notes, data) VALUES (:notes, :data)");
+        $stmt = $this->pdo->prepare("INSERT INTO Notes (notes, data, status) VALUES (:notes, :data, :status)");
         $now = date('Y:m:d H-i-s');
+        $status = 0;
         $stmt->bindParam(':notes', $text);
         $stmt->bindParam(':data', $now);
+        $stmt->bindParam(':status', $status);
         $stmt->execute();
     }
+    
+    public function addTask (string $text, int $chatId)
+    {
+        $query = "INSERT INTO Notes (userId, notes, data, status) VALUES (:userId, :notes, :data, :status)";
+        $status = '0';
+        $now = date('Y:m:d H-i-s');
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':userId', $chatId);
+        $stmt->bindParam(':notes', $text);
+        $stmt->bindParam(':data', $now);
+        $stmt->bindParam(':status', $status);
+        $stmt->execute();
+    }
+
 
     public function getAllNotes ()
     {
@@ -88,17 +104,6 @@ class Note extends DB {
         $stmt->execute();
     }
 
-    public function addTask (string $text, int $chatId)
-    {
-        $query = "INSERT INTO Notes (userId, todo, status) VALUES (:userId, :todo, :status)";
-        $status = '0';
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':userId', $chatId);
-        $stmt->bindParam(':todo', $text);
-        $stmt->bindParam(':status', $status);
-        $stmt->execute();
-    }
-
     public function checkedTaskId (int $id, int $checked)
     {
         if ($checked == 1) {
@@ -160,7 +165,7 @@ class Note extends DB {
         $stmt->bindParam(':userId', $chatId);
         $stmt->execute();
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
