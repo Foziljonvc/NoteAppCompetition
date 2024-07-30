@@ -1,6 +1,6 @@
 # Telegram Notes Bot
 
-This is a simple Telegram bot that allows users to manage their notes and tasks directly through Telegram. The bot can add, check, uncheck, and delete tasks, as well as display all tasks for a user.
+This is a simple Telegram bot that allows users to manage their notes and tasks directly through Telegram. The bot can add  and delete tasks, as well as display all tasks for a user.
 
 ## Getting Started
 
@@ -52,14 +52,11 @@ This is a simple Telegram bot that allows users to manage their notes and tasks 
     - The available commands are:
         - `/start` - Register the user and get a welcome message.
         - `/add` - Add a new task.
-        - `/check` - Mark a task as completed.
-        - `/uncheck` - Mark a task as not completed.
         - `/delete` - Delete a task.
         - `/tasks` - Get all tasks for the user.
 
 2. **Examples:**
     - To add a task, send `/add` followed by the task description.
-    - To mark a task as completed, send `/check` followed by the task ID.
     - To delete a task, send `/delete` followed by the task ID.
 
 ### Files Description
