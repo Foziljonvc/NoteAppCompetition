@@ -27,18 +27,20 @@ This is a simple Telegram bot that allows users to manage their notes and tasks 
     - Create a new database.
     - Run the following SQL commands to create the required tables:
     ```sql
+     CREATE TABLE Notes (
+     id INT AUTO_INCREMENT PRIMARY KEY, 
+     userId BIGINT,
+     notes VARCHAR(255),
+     status VARCHAR(32),
+     data DATETIME
+   );
+
     CREATE TABLE user (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        chatId BIGINT NOT NULL,
-        status VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+     chatId BIGINT,
+     status VARCHAR(32)
     );
 
-    CREATE TABLE Notes (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        userId BIGINT NOT NULL,
-        todo VARCHAR(255) NOT NULL,
-        status TINYINT(1) NOT NULL DEFAULT 0
-    );
     ```
 
 4. **Configure the bot:**
